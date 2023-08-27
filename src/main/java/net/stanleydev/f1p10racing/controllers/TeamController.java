@@ -4,6 +4,7 @@ import net.stanleydev.f1p10racing.dtos.TeamDTO;
 import net.stanleydev.f1p10racing.dtos.TeamPostDTO;
 import net.stanleydev.f1p10racing.entities.Team;
 import net.stanleydev.f1p10racing.services.TeamService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,14 +20,14 @@ public class TeamController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
-    public List<TeamDTO> getAllTeams(){
-        return teamService.getAllTeams();
+    public ResponseEntity getAllTeams(){
+        return ResponseEntity.ok(teamService.getAllTeams());
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
-    public String newTeam(@RequestBody TeamPostDTO teamPostDTO){
-        return teamService.newTeam(teamPostDTO);
+    public ResponseEntity newTeam(@RequestBody TeamPostDTO teamPostDTO){
+        return ResponseEntity.ok(teamService.newTeam(teamPostDTO));
     }
 
 }

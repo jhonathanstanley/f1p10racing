@@ -1,9 +1,12 @@
 package net.stanleydev.f1p10racing.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import net.stanleydev.f1p10racing.dtos.TeamDTO;
 import net.stanleydev.f1p10racing.dtos.TeamPostDTO;
+
+import java.util.Set;
 
 @Entity(name = "Team")
 @Table(name = "tb_team")
@@ -18,11 +21,9 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String name;
-
-    public Team(TeamDTO teamDTO) {
-        this.id = teamDTO.id();
-        this.name = teamDTO.name();
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "team")
+    private Set<Driver> drivers;
 
     public Team(TeamPostDTO teamPostDTO) {
         this.name = teamPostDTO.name();

@@ -28,4 +28,8 @@ public class TeamService {
         teamRepository.save(team);
         return team.toString();
     }
+
+    public TeamDTO getTeamById(String id){
+        return new TeamDTO(teamRepository.findById(id).get());
+    }
 }
