@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import net.stanleydev.f1p10racing.dtos.DriverPostDTO;
 
+import java.util.Set;
+
 @Entity(name = "Driver")
 @Table(name = "tb_driver")
 @Getter
@@ -24,6 +26,9 @@ public class Driver {
     @ManyToOne
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
+    @JsonIgnore
+    @OneToMany(mappedBy = "driver")
+    private Set<DriverInSeason> driverInSeason;
 
     public Driver(DriverPostDTO driverPostDTO){
         this.name = driverPostDTO.name();
